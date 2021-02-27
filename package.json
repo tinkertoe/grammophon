@@ -7,7 +7,8 @@
   "scripts": {
     "start": "ts-node-dev src/index.ts",
     "build": "tsc",
-    "postinstall": "cp libvosk.so node_modules/vosk/lib/linux-x86_64/libvosk.so && sudo apt update -y && sudo apt install -y alsa-utils build-essential libudev-dev"
+    "preinstall": "node preinstall.js",
+    "postinstall": "node postinstall.js"
   },
   "devDependencies": {
     "@types/escpos": "^2.5.0",
