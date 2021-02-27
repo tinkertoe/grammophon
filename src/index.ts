@@ -10,7 +10,11 @@ import escpos from 'escpos'
 escpos.USB = require('escpos-usb')
 
 log('Starting voice recognition engine')
-const rec = new vosk.Recognizer(new vosk.Model('model'), config.samplerate * config.samplerateFactor)
+let samplerateFactor: number = 1
+if (process.platform == 'win32') {
+  samplerateFactor = 2
+}
+const rec = new vosk.Recognizer(new vosk.Model('model'), config.samplerate * samplerateFactor)
 
 log('Setting up microphone interface')
 const mic = Mic({ rate: config.samplerate })

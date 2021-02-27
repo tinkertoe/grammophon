@@ -5,7 +5,6 @@ import log from './log'
 dotenv.config()
 const config = {
   samplerate: Number(process.env.SAMPLERATE) || 44100,
-  samplerateFactor: Number(process.env.SAMPLERATE_FACTOR) || 2,
   greeting: process.env.GREETING || 'Hallo Mensch, Maschiene hier!'
 }
 log('CONFIG:', config)
