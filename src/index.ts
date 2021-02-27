@@ -22,14 +22,19 @@ const micStream = mic.getAudioStream() as Stream
 
 // try block will cause app to keep running with just voice recognition
 log('Define printer connection')
-let device: escpos.USB
-let printer: escpos.Printer
-try {
-  device = new escpos.USB()
-  printer = new escpos.Printer(device)
-} catch (err) {
-  log(chalk.red(err))
-}
+const device = new escpos.USB()
+const printer = new escpos.Printer(device)
+device.open((err) => {
+  printer
+    .font('B')
+    .align('CT')
+    .style('B')
+    .text('Hallo Mensch,')
+    .text('Maschiene hier!')
+    .drawLine()
+    .feed(1)
+    .close()
+})
 
 // Handle result of speech recognition
 const handleResult = (result: Object) => {
@@ -39,12 +44,13 @@ const handleResult = (result: Object) => {
     // Log result in console
     log(chalk.yellow('> ' + result['text']))
 
-    // Only send to printer if it was set up
-    if (device && printer) {
-      device.open(() => {
-        printer.text(result['text'])
-      }).close()
-    }
+    device.open((err) => {
+      printer
+        .align('LT')
+        .style('NORMAL')
+        .text('> ' + result['text'])
+        .close()
+    })
   }
 }
 
