@@ -34,7 +34,7 @@ device.open((err) => {
     .text('Maschiene hier!')
     .drawLine()
     .feed(1)
-    .close()
+    .cut()
 })
 
 printer
