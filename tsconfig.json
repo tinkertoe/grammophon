@@ -1,0 +1,10 @@
+{
+  "files": ["src/index.ts"],
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "outDir": "dist",
+  },
+}

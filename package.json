@@ -1,0 +1,29 @@
+{
+  "name": "grammophon",
+  "version": "1.0.0",
+  "author": "Henry Muth",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "ts-node-dev src/index.ts",
+    "build": "tsc",
+    "postinstall": "cp libvosk.so node_modules/vosk/lib/linux-x86_64/libvosk.so"
+  },
+  "devDependencies": {
+    "@types/escpos": "^2.5.0",
+    "@types/node": "^14.14.31",
+    "@types/wav": "^1.0.0",
+    "pkg": "^4.4.9",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "escpos": "^3.0.0-alpha.6",
+    "escpos-usb": "^3.0.0-alpha.4",
+    "figlet": "^1.5.0",
+    "mic": "^2.1.2",
+    "vosk": "^0.3.21"
+  }
+}
