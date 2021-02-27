@@ -16,15 +16,15 @@ log('Setting up microphone interface')
 const mic = Mic({ rate: config.samplerate })
 const micStream = mic.getAudioStream() as Stream
 
-// log('Define printer connection')
-// let device: escpos.USB
-// let printer: escpos.Printer
-// try {
-//   device = new escpos.USB()
-//   printer = new escpos.Printer(device)
-// } catch (error) {
-//   log(chalk.red(error))
-// }
+log('Define printer connection')
+let device: escpos.USB
+let printer: escpos.Printer
+try {
+  device = new escpos.USB()
+  printer = new escpos.Printer(device)
+} catch (err) {
+  log(chalk.red(err))
+}
 
 // Handle result of speech recognition
 const handleResult = (result: Object) => {
@@ -35,11 +35,11 @@ const handleResult = (result: Object) => {
     log(chalk.yellow('> ' + result['text']))
 
     // Only send to printer if it was set up
-    // if (device && printer) {
-    //   device.open(() => {
-    //     printer.text(result['text'])
-    //   }).close()
-    // }
+    if (device && printer) {
+      device.open(() => {
+        printer.text(result['text'])
+      }).close()
+    }
   }
 }
 
@@ -50,6 +50,10 @@ micStream.on('data', (data) => {
   if (eof) {
     handleResult(JSON.parse(rec.result()))
   }
+})
+
+micStream.on('error', (err) => {
+  throw new Error(err)
 })
 
 // Start listening
