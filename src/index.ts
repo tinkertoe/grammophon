@@ -52,10 +52,6 @@ micStream.on('data', (data) => {
   }
 })
 
-micStream.on('error', (err) => {
-  throw new Error(err)
-})
-
 // Start listening
 mic.start()
 log(chalk.green('Listening 🎤'))
