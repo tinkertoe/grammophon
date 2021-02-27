@@ -16,6 +16,7 @@ log('Setting up microphone interface')
 const mic = Mic({ rate: config.samplerate })
 const micStream = mic.getAudioStream() as Stream
 
+// try block will cause app to keep running with just voice recognition
 log('Define printer connection')
 let device: escpos.USB
 let printer: escpos.Printer
