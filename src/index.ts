@@ -26,6 +26,7 @@ const device = new escpos.USB()
 const printer = new escpos.Printer(device)
 
 device.open((err) => {
+  // Print welcome message
   printer
     .font('B')
     .align('CT')
@@ -36,41 +37,41 @@ device.open((err) => {
     .feed(1)
     .cut()
     .close()
-  printer
-    .print('test123')
-    .cut()
-    .close()
-})
 
+  
+  // Handle result of speech recognition
+  const handleResult = (result: Object) => {
+    // Check if result has text and that something was said
+    if (result.hasOwnProperty('text') && result['text'] != '') {
 
+      // Log result in console
+      log(chalk.yellow('> ' + result['text']))
 
-// Handle result of speech recognition
-const handleResult = (result: Object) => {
-  // Check if result has text and that something was said
-  if (result.hasOwnProperty('text') && result['text'] != '') {
-
-    // Log result in console
-    log(chalk.yellow('> ' + result['text']))
-
-    device.open((err) => {
       printer
         .align('LT')
         .style('NORMAL')
         .text('> ' + result['text'])
         .close()
-    })
+    }
   }
-}
 
-// When new data arrives on the microphone stream, send it to the recognition engine
-micStream.on('data', (data) => {
-  // Function returns true if it thinks the sentence is over
-  const eof = rec.acceptWaveform(data)
-  if (eof) {
-    handleResult(JSON.parse(rec.result()))
-  }
+  // When new data arrives on the microphone stream, send it to the recognition engine
+  micStream.on('data', (data) => {
+    // Function returns true if it thinks the sentence is over
+    const eof = rec.acceptWaveform(data)
+    if (eof) {
+      handleResult(JSON.parse(rec.result()))
+    }
+  })
+
+  // Start listening
+  mic.start()
+  log(chalk.green('Listening 🎤'))
+  
 })
 
-// Start listening
-mic.start()
-log(chalk.green('Listening 🎤'))
+
+
+
+
+
