@@ -1,60 +1,27 @@
 import './heading'
 import log from './log'
-import config from './config'
-
 import chalk from 'chalk'
+import vosk from 'vosk'
 import Mic from 'mic'
 import { Stream } from 'stream'
-import vosk from 'vosk'
-import escpos from 'escpos'
-escpos.USB = require('escpos-usb')
+import { exec } from 'child_process'
 
 log('Starting voice recognition engine')
 let samplerateFactor: number = 1
-if (process.platform == 'win32') {
-  samplerateFactor = 2
-}
-const rec = new vosk.Recognizer(new vosk.Model('model'), config.samplerate * samplerateFactor)
+if (process.platform == 'win32') { samplerateFactor = 2 }
+const rec = new vosk.Recognizer(new vosk.Model('model'), 44100 * samplerateFactor)
 
 log('Setting up microphone interface')
-const mic = Mic({ rate: config.samplerate })
+const mic = Mic({ rate: 44100 })
 const micStream = mic.getAudioStream() as Stream
-
-// try block will cause app to keep running with just voice recognition
-log('Define printer connection')
-const device = new escpos.USB()
-const printer = new escpos.Printer(device)
-
-// Print welcome message
-device.open((err) => {
-  printer
-    .font('B')
-    .align('CT')
-    .style('B')
-    .text('Hallo Mensch,')
-    .text('Maschiene hier!')
-    .drawLine()
-    .feed(1)
-    .cut()
-    .close()
-})
 
 // Handle result of speech recognition
 const handleResult = (result: Object) => {
   // Check if result has text and that something was said
   if (result.hasOwnProperty('text') && result['text'] != '') {
-
     // Log result in console
     log(chalk.yellow('> ' + result['text']))
-
-    device.open((err) => {
-      printer
-        .align('LT')
-        .style('NORMAL')
-        .text('> ' + result['text'])
-        .cut()
-        .close()
-    })
+    exec(`node -r ts-node src/print.ts "> ${result['text']}"`)
   }
 }
 
@@ -70,3 +37,6 @@ micStream.on('data', (data) => {
 // Start listening
 mic.start()
 log(chalk.green('Listening 🎤'))
+
+// Print welcome message
+exec('node -r ts-node src/print.ts')
