@@ -37,14 +37,7 @@ device.open((err) => {
     .feed(1)
     .cut()
     .close()
-  printer
-    .align('LT')
-    .style('NORMAL')
-    .text('> ' + 'LLLLLLLLLLLOKLOOOKKO')
-    .cut()
-    .close()
 
-  
   // Handle result of speech recognition
   const handleResult = (result: Object) => {
     // Check if result has text and that something was said
