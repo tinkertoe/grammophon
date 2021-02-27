@@ -51,6 +51,7 @@ device.open((err) => {
         .align('LT')
         .style('NORMAL')
         .text('> ' + result['text'])
+        .cut()
         .close()
     }
   }
@@ -67,7 +68,7 @@ device.open((err) => {
   // Start listening
   mic.start()
   log(chalk.green('Listening 🎤'))
-  
+
 })
 
 
