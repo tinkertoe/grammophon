@@ -1,4 +1,4 @@
-const child_process = require('child_process')
+const spawnSync = require('child_process').spawnSync
 const os = require('os')
 if (os.arch() == 'arm64' && process.platform != 'win32') {
   console.log('Replacing libvosk.so library')
