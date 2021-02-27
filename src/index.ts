@@ -24,6 +24,7 @@ const micStream = mic.getAudioStream() as Stream
 log('Define printer connection')
 const device = new escpos.USB()
 const printer = new escpos.Printer(device)
+
 device.open((err) => {
   printer
     .font('B')
@@ -35,6 +36,10 @@ device.open((err) => {
     .feed(1)
     .close()
 })
+
+printer
+  .print('test123')
+  .close()
 
 // Handle result of speech recognition
 const handleResult = (result: Object) => {
