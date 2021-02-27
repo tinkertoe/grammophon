@@ -35,11 +35,14 @@ device.open((err) => {
     .drawLine()
     .feed(1)
     .cut()
+    .close()
+  printer
+    .print('test123')
+    .cut()
+    .close()
 })
 
-printer
-  .print('test123')
-  .close()
+
 
 // Handle result of speech recognition
 const handleResult = (result: Object) => {
