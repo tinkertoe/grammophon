@@ -2,25 +2,36 @@
 
 ## How to use
 
+### Linux
+
+1. Install all dependencies
+
 ```
-yarn install
+chmod +x install.sh
+bash install.sh
+```
+
+2. Start application
+
+```
 yarn start
 ```
 
-### Requirements
+### Windows
 
-#### Windows
+1. Install system dependencies
+  - Node JS
+  - Yarn Package Manager
+  - sox
+  - libusb (WinUSB) via Zadig
+  - Python
 
-- sox
-- libusb (WinUSB) via Zadig
-- python
+2. Install node requirements
+```
+yarn install
+```
 
-#### Linux
-
-⚠ **These should auto-install on linux**
-
-- alsa-utils
-- build-essential
-- libudev-dev
-- python
-
+3. Start programm
+```
+yarn start
+```
