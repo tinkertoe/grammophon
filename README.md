@@ -1,11 +1,10 @@
 # grammophon
 
-## Installation
+## How to use
 
-```sh
+```
 yarn install
-yarn build
-sudo node dist/src/index.js
+yarn start
 ```
 
 ### Requirements
@@ -14,6 +13,7 @@ sudo node dist/src/index.js
 
 - sox
 - libusb (WinUSB) via Zadig
+- python
 
 #### Linux
 
@@ -22,4 +22,5 @@ sudo node dist/src/index.js
 - alsa-utils
 - build-essential
 - libudev-dev
+- python
 
