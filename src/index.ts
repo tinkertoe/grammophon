@@ -36,8 +36,8 @@ const handleResult = (result: Object) => {
       connection.
     */ 
     exec(print_command + `"${text}"`, (err, stdout, stderr ) => {
-      if (stderr) { log(chalk.red(stderr)) }
-      if (stdout) { log(chalk.red(stdout)) }
+      if (stderr) { log(chalk.red(stderr.trim())) }
+      if (stdout) { log(stdout.trim()) }
     })
   }
 }
