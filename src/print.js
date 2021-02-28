@@ -11,6 +11,7 @@ try {
         .align('LT')
         .style('NORMAL')
         .text(process.argv[2])
+        .feed(1)
         .close()
     })
   } else {
@@ -21,7 +22,7 @@ try {
         .text('Hallo Mensch,')
         .text('Maschine hier!')
         .text('--------------------------------')
-        .feed(1)
+        .feed(3)
         .close()
     })
   }
