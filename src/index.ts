@@ -38,7 +38,7 @@ const handleResult = (result: Object) => {
     exec(print_command + `"${text}"`, (err, stdout, stderr ) => {
       if (stderr) { log(chalk.red(stderr.trim())) }
       if (stdout) { log(stdout.trim()) }
-    })
+    }).unref()
   }
 }
 
@@ -59,4 +59,4 @@ log(chalk.green('Listening 🎤'))
 exec(print_command, (err, stdout, stderr ) => {
   if (stderr) { log(chalk.red(stderr.trim())) }
   if (stdout) { log(stdout.trim()) }
-})
+}).unref()
