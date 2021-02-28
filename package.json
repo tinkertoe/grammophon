@@ -6,7 +6,6 @@
   "private": true,
   "scripts": {
     "start": "ts-node src/index.ts",
-    "preinstall": "node preinstall.js",
     "postinstall": "node postinstall.js"
   },
   "devDependencies": {
