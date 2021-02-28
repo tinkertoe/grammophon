@@ -23,4 +23,5 @@ micStream.on('data', (data) => {
 mic.start()
 log(chalk.green('Listening 🎤'))
 
+// Print greeting
 greet()
