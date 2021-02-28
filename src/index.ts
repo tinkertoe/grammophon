@@ -5,6 +5,11 @@ import vosk from 'vosk'
 import Mic from 'mic'
 import { Stream } from 'stream'
 import { exec } from 'child_process'
+import path from 'path'
+
+const print_command = path.join('node_modules', '.bin', 'ts-node') + ' src/print.ts '
+
+
 
 log('Starting voice recognition engine')
 let samplerateFactor: number = 1
@@ -20,8 +25,12 @@ const handleResult = (result: Object) => {
   // Check if result has text and that something was said
   if (result.hasOwnProperty('text') && result['text'] != '') {
     // Log result in console
-    log(chalk.yellow('> ' + result['text']))
-    exec(`node -r ts-node src/print.ts "> ${result['text']}"`)
+    const text = '> ' + result['text']
+    log(chalk.yellow(text))
+    exec(print_command + `"${text}"`, (err, stdout, stderr ) => {
+      if (stderr) { log(chalk.red(stderr)) }
+      if (stdout) { log(chalk.red(stdout)) }
+    })
   }
 }
 
@@ -39,4 +48,7 @@ mic.start()
 log(chalk.green('Listening 🎤'))
 
 // Print welcome message
-exec('node -r ts-node src/print.ts')
+exec(print_command, (err, stdout, stderr ) => {
+  if (stderr) { log(chalk.red(stderr.trim())) }
+  if (stdout) { log(stdout.trim()) }
+})
