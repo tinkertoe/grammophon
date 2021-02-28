@@ -7,9 +7,8 @@ import { Stream } from 'stream'
 import { exec } from 'child_process'
 import path from 'path'
 
+// Define console command to spawn print process
 const print_command = path.join('node_modules', '.bin', 'ts-node') + ' src/print.ts '
-
-
 
 log('Starting voice recognition engine')
 let samplerateFactor: number = 1
@@ -27,6 +26,15 @@ const handleResult = (result: Object) => {
     // Log result in console
     const text = '> ' + result['text']
     log(chalk.yellow(text))
+    /*  
+      The Raspberry Pi has trouble with closing the connection
+      to USB devices, because of it's kernel drivers. This means
+      we can't connect to the printer twice or it will error
+      with LIBUSB_ERROR_BUSY. To mittigate this we create the
+      connection to the printer in a seperate process which will
+      automaticly stop after the printing is done and free the
+      connection.
+    */ 
     exec(print_command + `"${text}"`, (err, stdout, stderr ) => {
       if (stderr) { log(chalk.red(stderr)) }
       if (stdout) { log(chalk.red(stdout)) }
