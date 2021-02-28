@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "ts-node-dev src/index.ts",
+    "start": "ts-node src/index.ts",
     "preinstall": "node preinstall.js",
     "postinstall": "node postinstall.js"
   },
