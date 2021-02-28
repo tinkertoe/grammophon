@@ -11,7 +11,7 @@ try {
         .align('LT')
         .style('NORMAL')
         .text(process.argv[2])
-        .feed(1)
+        .feed(2)
         .close()
     })
   } else {
