@@ -33,12 +33,15 @@ const handleResult = (result: Object) => {
       with LIBUSB_ERROR_BUSY. To mittigate this we create the
       connection to the printer in a seperate process which will
       automaticly stop after the printing is done and free the
-      connection.
+      connection. The code below executes the print.js file with
+      node and the recognised sentence as the first argument.
+      Further down, the same code is run without an argument,
+      which will print the welcome message.
     */ 
     exec(print_command + `"${text}"`, (err, stdout, stderr ) => {
       if (stderr) { log(chalk.red(stderr.trim())) }
       if (stdout) { log(stdout.trim()) }
-    }).unref()
+    })
   }
 }
 
@@ -59,4 +62,4 @@ log(chalk.green('Listening 🎤'))
 exec(print_command, (err, stdout, stderr ) => {
   if (stderr) { log(chalk.red(stderr.trim())) }
   if (stdout) { log(stdout.trim()) }
-}).unref()
+})
