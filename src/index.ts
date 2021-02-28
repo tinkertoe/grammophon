@@ -5,10 +5,10 @@ import vosk from 'vosk'
 import Mic from 'mic'
 import { Stream } from 'stream'
 import { exec } from 'child_process'
-import path from 'path'
 
 // Define console command to spawn print process
-const print_command = path.join('node_modules', '.bin', 'ts-node') + ' src/print.ts '
+let print_command = 'node src/print.js '
+if (process.platform == 'linux') { print_command = 'sudo ' + print_command }
 
 log('Starting voice recognition engine')
 let samplerateFactor: number = 1
