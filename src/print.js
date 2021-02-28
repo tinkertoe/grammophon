@@ -20,7 +20,7 @@ try {
         .style('B')
         .text('Hallo Mensch,')
         .text('Maschine hier!')
-        .drawLine()
+        .text('--------------------------------')
         .feed(1)
         .close()
     })
