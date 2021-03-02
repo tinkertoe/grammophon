@@ -1,3 +1,5 @@
+import './heading'
+import './update'
 import log from './log'
 import rec from './recognizer'
 import handleResult from './handleResult'
