@@ -1,0 +1,10 @@
+[Unit]
+Description=grammophon
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/yarn --cwd /home/pi/grammophon start > /home/pi/grammophon.log
+
+[Install]
+WantedBy=multi-user.target
